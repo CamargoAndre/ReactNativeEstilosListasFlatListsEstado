@@ -1,21 +1,64 @@
-import React from 'react';
-import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
+import React, {useState} from 'react';
+import { StyleSheet, Text, View, Button, TextInput, ScrollView, FlatList} from 'react-native';
+
+
 
 export default function App() {
+  const [contato, setContato] =useState('');
+  const [telefone, setTelefone] = useState('');
+
+  const[contatos, setContatos] = useState([]);
+
+  const[contadorContato, setContadorContato] = useState(1);
+
+  const capturaContato = (contato) =>{setContato(contato);}
+  const capturaTelefone = (telefone) =>{setTelefone(telefone);}
+
+  const adicionarContato = () =>{
+    setContatos ((contatos) =>{
+      console.log(contatos);
+      setContadorContato(contadorContato + 1);
+      return [...contatos, {key:contadorContato.toString(), cont:contato, tel:telefone}];
+    }); 
+  }
+
+
+
   return (
     <View style={styles.container} >
       <View><Text style={styles.titulo}>Cadastrar Contatos</Text></View>
       <View style={styles.cadastroContato}>
-        <TextInput style={styles.cadastroImputText} placeholder="Nome" />
-        <TextInput style={styles.cadastroImputText} placeholder="Telefone" />
+        <TextInput 
+          placeholder="Nome" 
+          style={styles.cadastroImputText} 
+          onChangeText={capturaContato}
+          value={contato} 
+           />
+        <TextInput 
+          placeholder="Telefone" 
+          style={styles.cadastroImputText} 
+          onChangeText={capturaTelefone}
+          value={telefone}
+          />
         <Button 
           title="Adicionar"
+          onPress={adicionarContato}
         />
 
       </View>
       <View>
         <View><Text style={styles.titulo}>Lista de Contatos</Text></View>
-
+        <ScrollView>
+          
+        {
+          contatos.map((contato) => 
+          <View key={contato.key} style={styles.itemNaLista}>
+            <Text>{'Cod:      ' +  contato.key} </Text>
+            <Text>{'Nome:     ' + contato.cont} </Text>
+            <Text>{'Telefone: ' + contato.tel}</Text>
+          </View> )
+        }
+      </ScrollView>
       </View>
     </View>
   );
@@ -24,7 +67,6 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     padding:50,
-    alignItems: 'center'
   },
   
   titulo: {
@@ -35,7 +77,7 @@ const styles = StyleSheet.create({
   cadastroContato: {
     flexDirection: 'column',
     justifyContent: 'space-between',
-    alignItems: 'center',
+    
     marginBottom: 20,
   },
 
@@ -47,7 +89,16 @@ const styles = StyleSheet.create({
     marginBottom:5,
     padding: 1
 
-  }
+  },
+  itemNaLista: {
+    padding: 12,
+    flexDirection: 'column',
+    backgroundColor: '#F3F781',
+    borderColor: '#000',
+    borderWidth: 1,
+    marginBottom: 8,
+    borderRadius: 8
+    }
 
 
 });
