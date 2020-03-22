@@ -48,6 +48,17 @@ export default function App() {
       </View>
       <View>
         <View><Text style={styles.titulo}>Lista de Contatos</Text></View>
+        <FlatList
+          data = {contatos}
+          renderItem = {contato => 
+            <View style={styles.itemNaLista}>
+              <Text>{'Cod:        ' +contato.item.key}</Text>
+              <Text>{'Nome:       ' +contato.item.cont}</Text>
+              <Text>{'Telefone:   ' + contato.item.tel}</Text>
+            </View>}
+        >
+        </FlatList>
+      {/*
         <ScrollView>
           
         {
@@ -59,6 +70,7 @@ export default function App() {
           </View> )
         }
       </ScrollView>
+      */}
       </View>
     </View>
   );
