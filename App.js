@@ -9,7 +9,7 @@ export default function App() {
 
   const[contatos, setContatos] = useState([]);
 
-  const[contadorContato, setContadorContato] = useState(1);
+  const[contadorContato, setContadorContato] = useState(10);
 
   const capturaContato = (contato) =>{setContato(contato);}
   const capturaTelefone = (telefone) =>{setTelefone(telefone);}
@@ -17,7 +17,7 @@ export default function App() {
   const adicionarContato = () =>{
     setContatos ((contatos) =>{
       console.log(contatos);
-      setContadorContato(contadorContato + 1);
+      setContadorContato(contadorContato + 2);
       return [...contatos, {key:contadorContato.toString(), cont:contato, tel:telefone}];
     }); 
   }
