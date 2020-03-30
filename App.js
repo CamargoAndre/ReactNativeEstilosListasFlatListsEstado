@@ -21,11 +21,12 @@ export default function App() {
 
   const removerContato = (keyASerRemovida) => {
     setContatos(contatos => {
+      const filter = contatos.filter(contato => contato.key !== keyASerRemovida);
       
-      return contatos.filter((contato) => {
-        console.log (contato.key + ' ' + keyASerRemovida);
-        contato.key !== keyASerRemovida
-      })
+      return filter;//contatos.filter(contato => {
+        //console.log (contato.key + ' ' + keyASerRemovida);
+        //contato.key != keyASerRemovida
+      
     });
   };
 
@@ -39,7 +40,6 @@ export default function App() {
           data = {contatos}
           renderItem = {contato => (
             <ContatoItem 
-              chave={contato.item.key} 
               keys={contato.item.key} 
               contato={contato.item.cont} 
               telefone ={contato.item.tel}

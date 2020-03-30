@@ -5,7 +5,7 @@ import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 const ContatoItem = (props) => {
 
     return(
-        <TouchableOpacity onPress={props.onDelete.bind(this, props.chave)}>
+        <TouchableOpacity onLongPress={props.onDelete.bind(this, props.keys)}>
             <View style={styles.itemNaLista}>
                 <Text>{'Cod:        ' + props.keys}</Text>
                 <Text>{'Nome:       ' + props.contato}</Text>
@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     itemNaLista: {
         padding: 12,
         flexDirection: 'column',
-        backgroundColor: '#F3F781',
+        backgroundColor: '#6495ED',
         borderColor: '#000',
         borderWidth: 1,
         marginBottom: 8,
