@@ -1,5 +1,6 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
+import Medidas from '../medidas/Medidas'
 
 
 const Cartao = (props) => {
@@ -14,15 +15,15 @@ const estilos = StyleSheet.create({
     cartao: {
         shadowColor: 'black',
         shadowOffset: {
-        width: 0,
-        height: 2
+        width: Medidas.zero,
+        height: Medidas.two
         },
-        shadowRadius: 6,
-        shadowOpacity: 0.32,
+        shadowRadius: Medidas.six,
+        shadowOpacity: Medidas.cartaoShadow,
         backgroundColor: 'white',
-        elevation: 4,
-        padding: 12,
-        borderRadius: 12
+        elevation: Medidas.four,
+        padding: Medidas.twelve,
+        borderRadius: Medidas.twelve
     }
 
 });

@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {View, TextInput, Button, StyleSheet} from 'react-native';
 import Cores from '../cores/Cores';
+import Medidas from '../medidas/Medidas';
 
 
 const ContatoInput = (props) => {
@@ -41,15 +42,15 @@ const styles = StyleSheet.create({
     cadastroContato: {
         flexDirection: 'column',
         justifyContent: 'space-between', 
-        marginBottom: 20,
+        marginBottom: Medidas.twenty,
     },
     cadastroInputText: {
-        fontSize:20,
+        fontSize:Medidas.twenty,
         borderColor: 'black',
         borderStyle: 'solid',
-        borderWidth: 1,
-        marginBottom:5,
-        padding: 1
+        borderWidth: Medidas.one,
+        marginBottom: Medidas.five,
+        padding: Medidas.one
     
       }
 });

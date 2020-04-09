@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import { StyleSheet, Text, View, FlatList} from 'react-native';
 import ContatoItem from './components/ContatoItem';
 import ContatoInput from './components/ContatoInput';
+import Medidas from './medidas/Medidas';
 
 
 export default function App() {
@@ -54,11 +55,11 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    padding:50,
+    padding:Medidas.fifty,
   },
   
   titulo: {
-    fontSize: 30,
-    marginBottom:20
+    fontSize: Medidas.thirty,
+    marginBottom:Medidas.twenty
   }
 });

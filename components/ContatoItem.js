@@ -2,6 +2,7 @@ import React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import Cartao from './Cartao';
 import Cores from '../cores/Cores';
+import Medidas from '../medidas/Medidas';
 
 const ContatoItem = (props) => {
 
@@ -23,7 +24,7 @@ const styles = StyleSheet.create({
     itemNaLista: {
         flexDirection: 'column',
         backgroundColor: Cores.corCartao,
-        marginBottom: 8
+        marginBottom: Medidas.eight
     }
 
 });
