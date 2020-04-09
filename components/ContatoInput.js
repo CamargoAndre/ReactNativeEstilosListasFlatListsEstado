@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {View, TextInput, Button, StyleSheet} from 'react-native';
+import Cores from '../cores/Cores';
 
 
 const ContatoInput = (props) => {
@@ -18,20 +19,20 @@ const ContatoInput = (props) => {
                 value={contato} 
             />
             <TextInput 
-                placeholder="Telefone" 
+                placeholder="Telefone"
+                keyboardType="number-pad" 
                 style={styles.cadastroInputText} 
                 onChangeText={capturaTelefone}
                 value={telefone}
             />
             <Button 
                 title="Adicionar"
+                color={Cores.corBotao}
                 onPress={() => props.onAdicionarContato(contato, telefone)}
             />
 
         </View>
     );
-
-
 }
 
 
