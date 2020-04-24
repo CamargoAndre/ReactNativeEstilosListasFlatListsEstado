@@ -7,7 +7,7 @@ import Medidas from '../medidas/Medidas';
 const ContatoItem = (props) => {
 
     return(
-        <TouchableOpacity onLongPress={props.onDelete.bind(this, props.keys)}>
+        <TouchableOpacity onLongPress={props.onDelete.bind(this, props.keys)} onPress={props.contSelecionado.bind(this, props.keys)}>
             {/*<View style={styles.itemNaLista}> */}
             <Cartao estilos={styles.itemNaLista}>
                 <Text>{'Cod:        ' + props.keys}</Text>
