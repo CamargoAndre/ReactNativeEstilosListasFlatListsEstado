@@ -10,15 +10,14 @@ import Medidas from '../medidas/Medidas';
 
 const TelaInicio = (props) => {
 
-    const[contatos, setContatos] = useState([]);
+    const[contatos, setContatos] = useState(props.contatosGeral);
 
-    const[contadorContato, setContadorContato] = useState(10);
+    const[contadorContato, setContadorContato] = useState(props.cont);
 
     const[contato, setContato] = useState([]);
   
     const adicionarContato = (contato, telefone) =>{
       setContatos ((contatos) =>{
-        console.log(contatos);
         setContadorContato(contadorContato + 2);
         return [...contatos, {key:contadorContato.toString(), cont:contato, tel:telefone}];
       }); 
@@ -34,17 +33,14 @@ const TelaInicio = (props) => {
       });
     };
 
-    const contatoSelecionado =(keyContato) => {
-      
-        const contato = contatos.filter(contato => contato.key === keyContato);
+    const contatoSelecionado = (keyContato) => {
+
+      props.keyContatoSelecionado(keyContato);
+      props.alteraTela(contatos, contadorContato);
+
+    }
+
         
-        console.log(contato);
-
-        props.contsSelecionado(contato);
-      
-
-    };
-    
     return(
         <View>
             <View><Text style={styles.titulo}>Cadastrar Contatos</Text></View>

@@ -8,23 +8,48 @@ import Contato from './telas/Contato';
 
 export default function App() {
 
-  const[contato, setContato] = useState([]);
-  const[tela, setTela] = useState('');
+  const[contatos, setContatos] = useState([]);
+  const[keyContato, setKeyContato] = useState('');
+  const[tela, setTela] = useState(1);
 
-  const contatoSelecionado = (contato) => {
+  const[contador, setContador] = useState(10);
 
-    setContato(contato);
-    setTela(2);
 
+  const keySelecionado = (keyContato) => {
+
+    setKeyContato(keyContato);
   };
 
-  let conteudo = <TelaInicio contsSelecionado={contatoSelecionado}/>
+  const telaSelecionada = (contatos, contador) => {
+    setContatos(contatos)
+    setContador(contador)
+    if(tela === 1){
+      setTela(2);
+    }else if(tela === 2) {
+      setTela(1);
+    }
+  };
 
-  if(tela) {
 
-    conteudo = <Contato />
+  let conteudo;
+  
+  if(tela === 1){
+    conteudo = <TelaInicio 
+                keyContatoSelecionado={keySelecionado} 
+                alteraTela={telaSelecionada} 
+                contatosGeral={contatos} 
+                cont={contador}/>;
   }
-  return (
+  else if(tela === 2) {
+
+    conteudo = <Contato 
+                  editCont={keyContato} 
+                  editContatos={contatos} 
+                  voltar={telaSelecionada} 
+                  cont={contador} />
+  }
+
+  return (  
     <View style={styles.container} >
 
       {conteudo}
