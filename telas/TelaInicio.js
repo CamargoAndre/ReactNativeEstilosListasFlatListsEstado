@@ -1,18 +1,20 @@
 import React, {useState} from 'react';
 
-import {StyleSheet, Text, View, FlatList} from 'react-native';
+import {StyleSheet, Text, View, FlatList, Platform} from 'react-native';
 
 import ContatoItem from '../components/ContatoItem';
 import ContatoInput from '../components/ContatoInput';
 
 import Medidas from '../medidas/Medidas';
+import { HeaderButtons, Item } from 'react-navigation-header-buttons';
+import BotaoCabecalho from '../components/BotaoCabecalho';
 
 
 const TelaInicio = (props) => {
 
-    const[contatos, setContatos] = useState(props.contatosGeral);
+    const[contatos, setContatos] = useState([]);
 
-    const[contadorContato, setContadorContato] = useState(props.cont);
+    const[contadorContato, setContadorContato] = useState(10);
 
     const[contato, setContato] = useState([]);
   
@@ -42,11 +44,8 @@ const TelaInicio = (props) => {
 
         
     return(
-        <View>
-            <View><Text style={styles.titulo}>Cadastrar Contatos</Text></View>
-                <ContatoInput onAdicionarContato ={adicionarContato}/>
+        <View style={styles.container}>
             <View>
-                <View><Text style={styles.titulo}>Lista de Contatos</Text></View>
                 <FlatList
                 data = {contatos}
                 renderItem = {contato => (
@@ -59,12 +58,30 @@ const TelaInicio = (props) => {
                     />
                     )}
                 />
-                
             </View>
         </View>
     );
     
 }
+
+TelaInicio.navigationOptions = dadosNav => {
+  return{
+    headerTitle: 'Lista Contatos',
+    headerRight: () => (
+      <HeaderButtons 
+        HeaderButtonComponent={BotaoCabecalho}
+      >
+        <Item 
+          title="Adicionar"
+          iconName={Platform.OS === 'android' ? 'md-add' : 'ios-add'}
+          onPress={() => {dadosNav.navigation.navigate('NovoContato')}}
+        />
+      </HeaderButtons>
+    )
+  }
+
+}
+
 
 const styles = StyleSheet.create({
     container: {
