@@ -17,7 +17,7 @@ const ContatoNavigator = createStackNavigator({
         headerStyle:{
             backgroundColor:Platform.OS === 'android' ? Cores.corHeader : ''
         },
-        headerTintColor:Platform.OS === 'android' ? 'whithe' : Cores.corHeader 
+        headerTintColor:Platform.OS === 'android' ? 'white' : Cores.corHeader 
     }
 });
 
