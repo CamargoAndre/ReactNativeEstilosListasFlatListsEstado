@@ -27,8 +27,6 @@ const ContatoItem = (props) => {
         )
     } 
 
-{/*props.onDelete.bind(this, props.keys)*/}
-
     return(
         <TouchableOpacity onLongPress={excluirContato} onPress={props.contSelecionado.bind(this, props.keys)}>
             {/*<View style={styles.itemNaLista}> */}

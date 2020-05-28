@@ -1,38 +1,29 @@
 import React, {useState} from 'react';
-
 import {StyleSheet, Text, View, FlatList, Platform} from 'react-native';
+import { HeaderButtons, Item } from 'react-navigation-header-buttons';
+
+import { useSelector, useDispatch } from 'react-redux';
 
 import ContatoItem from '../components/ContatoItem';
-import ContatoInput from '../components/ContatoInput';
-
 import Medidas from '../medidas/Medidas';
-import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import BotaoCabecalho from '../components/BotaoCabecalho';
+
+import * as contatosActions from '../store/contatos-actions';
 
 
 const TelaInicio = (props) => {
 
-    const[contatos, setContatos] = useState([]);
-
-    const[contadorContato, setContadorContato] = useState(10);
-
-    const[contato, setContato] = useState([]);
+  const dispatch = useDispatch()
   
-    const adicionarContato = (contato, telefone) =>{
-      setContatos ((contatos) =>{
-        setContadorContato(contadorContato + 2);
-        return [...contatos, {key:contadorContato.toString(), cont:contato, tel:telefone}];
-      }); 
-    };
-  
-    const removerContato = (keyASerRemovida) => {
+  const contatos = useSelector(estado => estado.contatos.contatos )
+
+  const removerContato = (keyASerRemovida) => {
       
-        setContatos(contatos => {
-        const filter = contatos.filter(contato => contato.key !== keyASerRemovida);
-        
-        return filter;
-        
-      });
+    dispatch(contatosActions.delContato(keyASerRemovida))
+        //setContatos(contatos => {
+        //const filter = contatos.filter(contato => contato.key !== keyASerRemovida);
+       // return filter; 
+      //});
     };
 
     const contatoSelecionado = (keyContato) => {
@@ -48,15 +39,17 @@ const TelaInicio = (props) => {
             <View>
                 <FlatList
                 data = {contatos}
+                keyExtractor={contato => contato.id}
                 renderItem = {contato => (
                     <ContatoItem 
-                    keys={contato.item.key} 
-                    contato={contato.item.cont} 
-                    telefone ={contato.item.tel}
-                    onDelete={removerContato}
-                    contSelecionado={contatoSelecionado}
+                      keys={contato.item.id} 
+                      contato={contato.item.nome} 
+                      telefone ={contato.item.telefone}
+                      onDelete={removerContato}
+                      contSelecionado={() => props.navigation.navigate('Contato', {nomeContato: contato.item.nome, 
+                                            telefoneContato: contato.item.contato})}
                     />
-                    )}
+                )}
                 />
             </View>
         </View>

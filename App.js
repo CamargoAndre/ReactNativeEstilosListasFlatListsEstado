@@ -1,21 +1,30 @@
-import React, {useState} from 'react';
-import { StyleSheet, Text, View, FlatList} from 'react-native';
-
-import Medidas from './medidas/Medidas';
-
-import TelaInicio from './telas/TelaInicio';
-import Contato from './telas/Contato';
+import React from 'react';
 import ContatoNavigator from './navegacao/ContatoNavigator';
+
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import reduxThunk from 'redux-thunk';
+
+import contatosReducer from './store/contatos-reducer';
+
+
+const rootReducer = combineReducers({
+
+  contatos: contatosReducer
+
+});
+
+const store = createStore(rootReducer, applyMiddleware(reduxThunk));
 
 export default function App() {
 
-
   return (  
-   
-    <ContatoNavigator />
-    
+    <Provider store={store}>
 
-    
+      <ContatoNavigator />
+
+    </Provider>
+           
   );
 }
 

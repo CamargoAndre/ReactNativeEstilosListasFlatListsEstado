@@ -1,25 +1,26 @@
 import React, {useState} from 'react';
 import { View, StyleSheet} from 'react-native';
+
+import { useDispatch } from 'react-redux';
+
 import ContatoInput from '../components/ContatoInput';
 import Medidas from '../medidas/Medidas';
 
+import * as contatosActions from '../store/contatos-actions';
 
 
 const NovoContatoTela = (props) => {
 
-
-    const adicContato = (contato, telefone) => {
-        console.log(contato)
-        console.log(telefone)
-        
-        props.navigation.navigate('Inicio')
-
-    }
-
+  const dispatch = useDispatch ();
+  
+  const adicionaContato = (contato, telefone) => {
+    dispatch(contatosActions.addContato(contato, telefone))
+    props.navigation.goBack();
+  }
 
   return (
       <View style={styles.container}>
-        <ContatoInput onAdicionarContato={adicContato} />
+        <ContatoInput onAdicionarContato={adicionaContato} />
       </View>
   )
 }
