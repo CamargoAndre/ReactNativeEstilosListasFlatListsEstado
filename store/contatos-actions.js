@@ -3,9 +3,9 @@ export const DEL_CONTATO = 'DEL_CONTATO';
 export const ALT_CONTATO = 'ALT_CONTATO';
 
 
-export const addContato = (nomeContato , telefoneContato) => {
+export const addContato = (nomeContato , telefoneContato, imagem) => {
     return {
-        type: ADD_CONTATO, dadosContato: { nomeContato: nomeContato, telefoneContato: telefoneContato }
+        type: ADD_CONTATO, dadosContato: { nomeContato: nomeContato, telefoneContato: telefoneContato, imagem: imagem  }
     }
 }
 
@@ -16,10 +16,10 @@ export const delContato = (idContato) => {
     }
 } 
 
-export const altContato = (idContato, nomeContato, telefoneContato) => {
+export const altContato = (idContato, nomeContato, telefoneContato, imagemContato) => {
 
     return {
-        type: ALT_CONTATO, dadosContato: {idContato: idContato, nomeContato: nomeContato, telefoneContato: telefoneContato}
+        type: ALT_CONTATO, dadosContato: {idContato: idContato, nomeContato: nomeContato, telefoneContato: telefoneContato, imagem: imagemContato}
     }
 }
 

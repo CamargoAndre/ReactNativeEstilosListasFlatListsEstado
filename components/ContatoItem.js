@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet, TouchableOpacity, Alert} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity, Alert, Image} from 'react-native';
 import Cartao from './Cartao';
 import Cores from '../cores/Cores';
 import Medidas from '../medidas/Medidas';
@@ -28,24 +28,45 @@ const ContatoItem = (props) => {
     } 
 
     return(
-        <TouchableOpacity onLongPress={excluirContato} onPress={props.contSelecionado.bind(this, props.keys)}>
-            {/*<View style={styles.itemNaLista}> */}
-            <Cartao estilos={styles.itemNaLista}>
+        <TouchableOpacity 
+            style={styles.contatoItem}
+            onLongPress={excluirContato} 
+            onPress={props.contSelecionado.bind(this, props.keys)}
+        >
+            <Image style={styles.imagem} source={{uri:props.imagem}}/>
+            <View style={styles.infoContainer}>
                 <Text>{'Cod:        ' + props.keys}</Text>
                 <Text>{'Nome:       ' + props.contato}</Text>
                 <Text>{'Telefone:   ' + props.telefone}</Text>
-            </Cartao>
-            {/*</View>*/}
+            </View>
+            
         </TouchableOpacity>
     );
 }
 
 const styles = StyleSheet.create({
     
-    itemNaLista: {
-        flexDirection: 'column',
-        backgroundColor: Cores.corCartao,
-        marginBottom: Medidas.eight
+    infoContainer: {
+        marginLeft:25,
+        width: 250,
+        justifyContent: 'center',
+        alignItems: 'flex-start'
+    },
+    imagem:{
+        width:70,
+        height:70,
+        borderRadius:35,
+        backgroundColor: '#ccc',
+        borderColor: Cores.corHeader,
+        borderWidth: 1
+    },
+    contatoItem:{
+        borderBottomColor: '#ccc',
+        borderBottomWidth: 1,
+        paddingVertical: 15,
+        paddingHorizontal: 30,
+        flexDirection:'row',
+        alignItems: 'center'
     }
 
 });

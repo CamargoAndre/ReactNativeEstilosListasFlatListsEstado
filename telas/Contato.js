@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 
-import { View, StyleSheet, Text, Button, FlatList, TextInput} from 'react-native';
+import { View, StyleSheet, Text, Button, FlatList, TextInput, Image} from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 
 import Cartao from '../components/Cartao';
 import ContatoInput from '../components/ContatoInput'
 import * as contatosActions from '../store/contatos-actions';
+import { ScrollView } from 'react-native-gesture-handler';
 
 
 const Contatos = (props) => {
@@ -19,23 +20,11 @@ const Contatos = (props) => {
     const[altera, setAltera] = useState(false)
     
 
-    const alterarOContato = (nome, telefone) => {
+    const alterarOContato = (nome, telefone, imagemURI) => {
 
-        setContato([{id: key, nome:nome, telefone:telefone}]);
+        setContato([{id: key, nome:nome, telefone:telefone, imagemURI:imagemURI}]);
 
-        dispatch(contatosActions.altContato(key, nome, telefone))
-
-
-
-        //setContatos(contatos => {const filter = contatos.filter(contato => contato.key !== keyContato);
-         //   return filter;
-        //});
-              
-        //setContatos((contatos) => { 
-         //   return [...contatos, {key:keyContato, cont:conts, tel:telefone}]
-       // });
-
-        //{setAltera(false)}
+        dispatch(contatosActions.altContato(key, nome, telefone, imagemURI))
 
         props.navigation.goBack();
 
@@ -54,13 +43,17 @@ const Contatos = (props) => {
 
     return(
         <View style={estilos.container}>
+            <ScrollView>
                 <FlatList
                     data = {contato}
                     renderItem = {cont => ( 
-                        <Cartao estilos={estilos.itemNaLista}>
-                            <Text style={estilos.texto}>Nome: {cont.item.nome} </Text>
-                            <Text style={estilos.texto}> Telefone: {cont.item.telefone} </Text>
-                        </Cartao>
+                        <View>
+                            <Image  style={estilos.imagem} source={{uri:cont.item.imagemURI}}/>
+                            <Cartao estilos={estilos.itemNaLista}>
+                                <Text style={estilos.texto}>Nome: {cont.item.nome} </Text>
+                                <Text style={estilos.texto}> Telefone: {cont.item.telefone} </Text>
+                            </Cartao>
+                        </View>
                     )}/>
             <View style={estilos.botoes}>
                 <View style={estilos.botao}> 
@@ -80,6 +73,7 @@ const Contatos = (props) => {
                     {alteraContato}
                         
             </View>
+            </ScrollView>
          </View>
     );
 };
@@ -88,8 +82,14 @@ const Contatos = (props) => {
 
 
 const estilos = StyleSheet.create({
+    imagem: {
+        width: 300,
+        height: 150,
+        borderRadius:15,
+        alignSelf: 'center'
+    },
     container: {
-        padding: 5,
+        padding: 8,
     },
     alterarContato:{
         padding: 10,
@@ -108,12 +108,13 @@ const estilos = StyleSheet.create({
     itemNaLista: {
         flexDirection: 'column',
         backgroundColor: '#4F4F4F',
-        marginBottom: 8,
+        marginBottom: 4,
+        marginTop:4,
         alignItems: 'center'
     },
     texto: {
-        fontSize: 28,
-        marginBottom: 15,
+        fontSize: 16,
+        marginBottom: 10,
         color: 'white'
         
     },

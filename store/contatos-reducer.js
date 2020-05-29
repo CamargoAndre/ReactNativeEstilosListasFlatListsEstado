@@ -9,7 +9,6 @@ const estadoInicial = {
 }
 
 
-
 export default (estado = estadoInicial, action) => {
     switch (action.type){
         case ADD_CONTATO:
@@ -33,7 +32,8 @@ export default (estado = estadoInicial, action) => {
                 
             }
 
-            const c = new Contato (id, action.dadosContato.nomeContato, action.dadosContato.telefoneContato)
+            const c = new Contato (id, action.dadosContato.nomeContato, action.dadosContato.telefoneContato, action.dadosContato.imagem)
+            console.log(JSON.stringify(c))
             return {
 
                 contatos: estado.contatos.concat(c)
@@ -50,12 +50,13 @@ export default (estado = estadoInicial, action) => {
 
             const keyAlt = action.dadosContato.idContato;
             const filterAlt = estado.contatos.filter(contato => contato.id !== keyAlt)
-            const cAlt = new Contato (action.dadosContato.idContato, action.dadosContato.nomeContato, action.dadosContato.telefoneContato)
+            const cAlt = new Contato (action.dadosContato.idContato, action.dadosContato.nomeContato, action.dadosContato.telefoneContato, action.dadosContato.imagem)
 
             return {
                 contatos: filterAlt.concat(cAlt)
             }
         default:
+            console.log('aqui' + JSON.stringify(action))
             return estado
     }
 

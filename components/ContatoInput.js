@@ -38,7 +38,7 @@ const ContatoInput = (props) => {
             <Button 
                 title="Adicionar"
                 color={Cores.corBotao}
-                onPress={() => props.onAdicionarContato(contato, telefone)}
+                onPress={() => props.onAdicionarContato(contato, telefone, imagemURI)}
             />
 
         </View>

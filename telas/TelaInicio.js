@@ -36,6 +36,7 @@ const TelaInicio = (props) => {
                       contato={contato.item.nome} 
                       telefone ={contato.item.telefone}
                       onDelete={removerContato}
+                      imagem={contato.item.imagemURI}
                       contSelecionado={() => props.navigation.navigate('Contato', {key: contato.item.id})}
                     />
                 )}

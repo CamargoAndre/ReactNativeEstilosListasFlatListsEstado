@@ -13,8 +13,8 @@ const NovoContatoTela = (props) => {
 
   const dispatch = useDispatch ();
   
-  const adicionaContato = (contato, telefone) => {
-    dispatch(contatosActions.addContato(contato, telefone))
+  const adicionaContato = (contato, telefone, imagemURI) => {
+    dispatch(contatosActions.addContato(contato, telefone, imagemURI))
     props.navigation.goBack();
   }
 
