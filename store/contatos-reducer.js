@@ -1,4 +1,4 @@
-import { ADD_CONTATO, DEL_CONTATO } from "./contatos-actions";
+import { ADD_CONTATO, DEL_CONTATO, ALT_CONTATO } from "./contatos-actions";
 import Contato from '../modelo/Contato';
 
 const estadoInicial = {
@@ -6,9 +6,6 @@ const estadoInicial = {
     contatos: []
 
 }
-
-
-
 
 export default (estado = estadoInicial, action) => {
     switch (action.type){
@@ -36,6 +33,11 @@ export default (estado = estadoInicial, action) => {
             
             return {
                 contatos: filter
+            }
+        case ALT_CONTATO:
+
+            return {
+                estado
             }
 
         default:

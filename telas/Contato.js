@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 import { View, StyleSheet, Text, Button, FlatList, TextInput} from 'react-native';
+import { useSelector, useDispatch } from 'react-redux';
 
 import Cartao from '../components/Cartao';
 
@@ -9,14 +10,18 @@ import Cartao from '../components/Cartao';
 
 const Contatos = (props) => {
 
+    const contatos = useSelector(estado => estado.contatos.contatos )
 
-    const [contatos, setContatos] = useState(props.editContatos);
-    const [keyContato, setKeyContato] = useState(props.editCont);
-    const[contador, setContador] = useState(props.cont)
+    //const [contatos, setContatos] = useState(props.editContatos);
+    //const [keyContato, setKeyContato] = useState(props.editCont);
+    //const[contador, setContador] = useState(props.cont)
 
-    const[contato, setContato] = useState(contatos.filter(contato => contato.key === keyContato));
+    const [key, setKey] = useState(props.navigation.getParam('key'))
+
+    const[contato, setContato] = useState(contatos.filter(contato => contato.id === key));
     const[contat, setContat] = useState('');
     const [telefone, setTelefone] = useState('');
+    
     const[altera, setAltera] = useState(false)
     
     const capturaContato = (contato) =>{setContat(contato);}
@@ -74,8 +79,8 @@ const Contatos = (props) => {
                     data = {contato}
                     renderItem = {cont => ( 
                         <Cartao estilos={estilos.itemNaLista}>
-                            <Text style={estilos.texto}>Nome: {cont.item.cont} </Text>
-                            <Text style={estilos.texto}> Telefone: {cont.item.tel} </Text>
+                            <Text style={estilos.texto}>Nome: {cont.item.nome} </Text>
+                            <Text style={estilos.texto}> Telefone: {cont.item.telefone} </Text>
                         </Cartao>
                     )}/>
             <View style={estilos.botoes}>
@@ -88,7 +93,7 @@ const Contatos = (props) => {
                 <View style={estilos.botao}>
                     <Button 
                         title='Voltar'
-                        onPress ={() => {props.voltar(contatos, contador)}}
+                        onPress ={() => {/*props.voltar(contatos, contador)*/}}
                     />
                 </View> 
             </View>
