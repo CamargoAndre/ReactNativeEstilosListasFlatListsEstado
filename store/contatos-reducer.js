@@ -1,3 +1,4 @@
+
 import { ADD_CONTATO, DEL_CONTATO, ALT_CONTATO } from "./contatos-actions";
 import Contato from '../modelo/Contato';
 
@@ -7,18 +8,29 @@ const estadoInicial = {
 
 }
 
+
+
 export default (estado = estadoInicial, action) => {
     switch (action.type){
         case ADD_CONTATO:
             let id;
             if(estado.contatos === null || estado.contatos.length === 0 ){
 
-                id =10;
+                id = 10
+                
 
             }else{
+                let maior = 0;
+                for(let i = 0 ; i < estado.contatos.length; i++){
+                    if(estado.contatos[i].id > maior){
+                        maior = estado.contatos[i].id;
+                    }
+                }
 
-                let cont = estado.contatos[estado.contatos.length - 1]
-                id = cont.id + 2 
+                id = maior + 2
+                //let cont = estado.contatos[estado.contatos.length - 1]
+                //id = id + 2//cont.id + 2
+                
             }
 
             const c = new Contato (id, action.dadosContato.nomeContato, action.dadosContato.telefoneContato)
@@ -36,10 +48,13 @@ export default (estado = estadoInicial, action) => {
             }
         case ALT_CONTATO:
 
-            return {
-                estado
-            }
+            const keyAlt = action.dadosContato.idContato;
+            const filterAlt = estado.contatos.filter(contato => contato.id !== keyAlt)
+            const cAlt = new Contato (action.dadosContato.idContato, action.dadosContato.nomeContato, action.dadosContato.telefoneContato)
 
+            return {
+                contatos: filterAlt.concat(cAlt)
+            }
         default:
             return estado
     }

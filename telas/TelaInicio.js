@@ -20,18 +20,8 @@ const TelaInicio = (props) => {
   const removerContato = (keyASerRemovida) => {
       
     dispatch(contatosActions.delContato(keyASerRemovida))
-        //setContatos(contatos => {
-        //const filter = contatos.filter(contato => contato.key !== keyASerRemovida);
-       // return filter; 
-      //});
+
     };
-
-    const contatoSelecionado = (keyContato) => {
-
-      props.keyContatoSelecionado(keyContato);
-      props.alteraTela(contatos, contadorContato);
-
-    }
 
         
     return(

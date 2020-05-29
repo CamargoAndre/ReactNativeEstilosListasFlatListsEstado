@@ -4,43 +4,40 @@ import { View, StyleSheet, Text, Button, FlatList, TextInput} from 'react-native
 import { useSelector, useDispatch } from 'react-redux';
 
 import Cartao from '../components/Cartao';
+import ContatoInput from '../components/ContatoInput'
+import * as contatosActions from '../store/contatos-actions';
 
-
-// import { Container } from './styles';
 
 const Contatos = (props) => {
 
+    const dispatch = useDispatch()
+
     const contatos = useSelector(estado => estado.contatos.contatos )
 
-    //const [contatos, setContatos] = useState(props.editContatos);
-    //const [keyContato, setKeyContato] = useState(props.editCont);
-    //const[contador, setContador] = useState(props.cont)
-
     const [key, setKey] = useState(props.navigation.getParam('key'))
-
     const[contato, setContato] = useState(contatos.filter(contato => contato.id === key));
-    const[contat, setContat] = useState('');
-    const [telefone, setTelefone] = useState('');
-    
     const[altera, setAltera] = useState(false)
     
-    const capturaContato = (contato) =>{setContat(contato);}
-    const capturaTelefone = (telefone) =>{setTelefone(telefone);}
+
+    const alterarOContato = (nome, telefone) => {
+
+        setContato([{id: key, nome:nome, telefone:telefone}]);
+
+        dispatch(contatosActions.altContato(key, nome, telefone))
 
 
-    const alterarOContato = (conts, telefone) => {
 
-        setContato([{key: keyContato, cont:conts, tel:telefone}]);
-
-        setContatos(contatos => {const filter = contatos.filter(contato => contato.key !== keyContato);
-            return filter;
-        });
+        //setContatos(contatos => {const filter = contatos.filter(contato => contato.key !== keyContato);
+         //   return filter;
+        //});
               
-        setContatos((contatos) => { 
-            return [...contatos, {key:keyContato, cont:conts, tel:telefone}]
-        });
+        //setContatos((contatos) => { 
+         //   return [...contatos, {key:keyContato, cont:conts, tel:telefone}]
+       // });
 
-        {setAltera(false)}
+        //{setAltera(false)}
+
+        props.navigation.goBack();
 
     }
 
@@ -51,27 +48,9 @@ const Contatos = (props) => {
 
         alteraContato =
              <View style={estilos.cadastroContato}>
-            <TextInput 
-                placeholder="Nome" 
-                style={estilos.cadastroInputText} 
-                onChangeText={capturaContato}
-                value={contat} 
-            />
-            <TextInput 
-                placeholder="Telefone"
-                keyboardType="number-pad" 
-                style={estilos.cadastroInputText} 
-                onChangeText={capturaTelefone}
-                value={telefone}
-            />
-            <Button 
-                title="Confirmar"
-                onPress = {() =>{alterarOContato(contat, telefone)}}
-            
-            />
+                <ContatoInput onAdicionarContato={alterarOContato} />
             </View>
     }
-
 
     return(
         <View style={estilos.container}>
@@ -93,11 +72,11 @@ const Contatos = (props) => {
                 <View style={estilos.botao}>
                     <Button 
                         title='Voltar'
-                        onPress ={() => {/*props.voltar(contatos, contador)*/}}
+                        onPress ={() => {props.navigation.navigate('Inicio')}}
                     />
                 </View> 
             </View>
-            <View>
+            <View style={estilos.alterarContato}>
                     {alteraContato}
                         
             </View>
@@ -106,10 +85,17 @@ const Contatos = (props) => {
 };
 
 
+
+
 const estilos = StyleSheet.create({
     container: {
-        padding: 2,
-      },
+        padding: 5,
+    },
+    alterarContato:{
+        padding: 10,
+        marginTop: 10
+    },
+
     botoes: {
         flexDirection: 'row',
         width: '100%',
