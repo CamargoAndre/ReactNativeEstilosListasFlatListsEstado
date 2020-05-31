@@ -1,8 +1,11 @@
 import * as FileSystem from 'expo-file-system';
 
+import { inserirContato, buscarContatos } from '../helpers/db';
+
 export const ADD_CONTATO = 'ADD_CONTATO';
 export const DEL_CONTATO = 'DEL_CONTATO';
 export const ALT_CONTATO = 'ALT_CONTATO';
+export const LISTAR_CONTATOS = 'LISTAR_CONTATOS';
 
 
 
@@ -17,8 +20,15 @@ export const addContato = (nomeContato , telefoneContato, imagem) => {
                 from: imagem,
                 to: novoPath
             })
+            const resultadoDB = await inserirContato(
+                nomeContato,
+                telefoneContato,
+                novoPath
+            );
 
-            dispatch({type: ADD_CONTATO, dadosContato: { nomeContato: nomeContato, telefoneContato: telefoneContato,
+            console.log(resultadoDB);
+
+            dispatch({type: ADD_CONTATO, dadosContato: { id: resultadoDB.insertId, nomeContato: nomeContato, telefoneContato: telefoneContato,
                  imagem: novoPath  } })
 
         } catch(err){
@@ -27,6 +37,20 @@ export const addContato = (nomeContato , telefoneContato, imagem) => {
         }
     };       
 }
+
+export const listarContatos = () => {
+    return async dispatch => {
+        try{
+            const resultadoDB = await buscarContatos();
+            dispatch({type: LISTAR_CONTATOS, constatos: resultadoDB.rows._array });
+        }
+        catch(err){
+            console.log(err);
+            throw err;
+        }
+    }
+};
+
 
 export const delContato = (idContato) => {
 

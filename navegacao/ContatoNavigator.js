@@ -1,5 +1,5 @@
 import { createStackNavigator } from "react-navigation-stack";
-import Contato from '../telas/Contato';
+import ContatoAlterar from '../telas/ContatoAlterar';
 import TelaInicio from '../telas/TelaInicio';
 import NovoContatoTela from '../telas/NovoContatoTela';
 import Cores from '../cores/Cores'
@@ -10,7 +10,7 @@ import { createAppContainer } from "react-navigation";
 const ContatoNavigator = createStackNavigator({
 
     Inicio: TelaInicio,
-    Contato: Contato,
+    Contato: ContatoAlterar,
     NovoContato: NovoContatoTela
 },{
     defaultNavigationOptions: {

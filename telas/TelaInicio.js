@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useEffect } from 'react';
 import {StyleSheet, Text, View, FlatList, Platform} from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
@@ -14,8 +14,11 @@ import * as contatosActions from '../store/contatos-actions';
 const TelaInicio = (props) => {
 
   const dispatch = useDispatch()
-  
   const contatos = useSelector(estado => estado.contatos.contatos )
+
+  useEffect(() => {
+    dispatch(contatosActions.listarContatos())
+  }, [dispatch]);
 
   const removerContato = (keyASerRemovida) => {
       
