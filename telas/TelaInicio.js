@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import {StyleSheet, Text, View, FlatList, Platform} from 'react-native';
+import {StyleSheet, View, FlatList, Platform} from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
 import { useSelector, useDispatch } from 'react-redux';
@@ -9,16 +9,28 @@ import Medidas from '../medidas/Medidas';
 import BotaoCabecalho from '../components/BotaoCabecalho';
 
 import * as contatosActions from '../store/contatos-actions';
+import db from '../env';
 
 
 const TelaInicio = (props) => {
 
-  const dispatch = useDispatch()
-  const contatos = useSelector(estado => estado.contatos.contatos )
+  //const dispatch = useDispatch()
+  //const contatos = useSelector(estado => estado.contatos.contatos )
+  const [contatos, setContatos] = useState([]);
+
+  //useEffect(() => {
+    //dispatch(contatosActions.listarContatos())
+  //}, [dispatch]);
 
   useEffect(() => {
-    dispatch(contatosActions.listarContatos())
-  }, [dispatch]);
+    db.collection('contatos').onSnapshot((snapshot) => {
+      let aux = [];
+      snapshot.forEach(doc => {
+        aux.push(doc.data());
+      });
+      setContatos(aux)
+    });
+  }, []);
 
   const removerContato = (keyASerRemovida) => {
       
@@ -35,14 +47,14 @@ const TelaInicio = (props) => {
                 keyExtractor={contato => contato.id}
                 renderItem = {contato => (
                     <ContatoItem 
-                      keys={contato.item.id} 
+                      //keys={contato.item.id} 
                       contato={contato.item.nome} 
                       telefone ={contato.item.telefone}
                       lat={contato.item.latitude}
                       lng={contato.item.longitude}
                       data={contato.item.data}
-                      onDelete={removerContato}
-                      imagem={contato.item.imagemURI}
+                      //onDelete={removerContato}
+                      imagem={contato.item.imagem}
                       contSelecionado={() => props.navigation.navigate('Contato', {key: contato.item.id})}
                     />
                 )}

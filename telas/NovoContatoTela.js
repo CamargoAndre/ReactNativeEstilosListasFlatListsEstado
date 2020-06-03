@@ -10,6 +10,10 @@ import * as contatosActions from '../store/contatos-actions';
 import * as Location from 'expo-location';
 import * as Permissions from 'expo-permissions';
 
+import db from '../env';
+
+
+
 
 const NovoContatoTela = (props) => {
 
@@ -22,7 +26,18 @@ const NovoContatoTela = (props) => {
     let latitude = localizacao.coords.latitude;
     let longitude = localizacao.coords.longitude;
 
-    dispatch(contatosActions.addContato(contato, telefone, imagemURI, latitude, longitude))
+    let data = new Date().toString();
+
+    db.collection('contatos').add({
+      nome: contato,
+      telefone: telefone,
+      imagem: imagemURI,
+      lat: latitude,
+      lng: longitude,
+      data: data
+  })
+
+    //dispatch(contatosActions.addContato(contato, telefone, imagemURI, latitude, longitude))
     props.navigation.goBack();
   }
 
