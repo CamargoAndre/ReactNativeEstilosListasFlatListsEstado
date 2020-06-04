@@ -1,6 +1,6 @@
 import * as FileSystem from 'expo-file-system';
 
-import { inserirContato, buscarContatos } from '../helpers/db';
+//import { inserirContato, buscarContatos } from '../helpers/db';
 import ENV from '../env';
 import * as firebase from 'firebase';
 import 'firebase/firestore'
@@ -51,7 +51,7 @@ export const addContato = (nomeContato , telefoneContato, imagem, latitude, long
     };       
 }
 
-export const listarContatos = () => {
+/*export const listarContatos = () => {
     return async dispatch => {
         try{
             const resultadoDB = await buscarContatos();
@@ -64,7 +64,7 @@ export const listarContatos = () => {
     }
 };
 
-
+*/
 export const delContato = (idContato) => {
 
     return {

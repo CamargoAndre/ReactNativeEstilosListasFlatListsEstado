@@ -1,23 +1,23 @@
 import React, {useState} from 'react';
 import { View, StyleSheet, Alert} from 'react-native';
 
-import { useDispatch } from 'react-redux';
+//import { useDispatch } from 'react-redux';
 
 import ContatoInput from '../components/ContatoInput';
 import Medidas from '../medidas/Medidas';
 
-import * as contatosActions from '../store/contatos-actions';
+//import * as contatosActions from '../store/contatos-actions';
 import * as Location from 'expo-location';
 import * as Permissions from 'expo-permissions';
 
-import db from '../env';
+import db from '../helpers/Firebase';
 
 
 
 
 const NovoContatoTela = (props) => {
 
-  const dispatch = useDispatch ();
+  //const dispatch = useDispatch ();
   
   const adicionaContato = async(contato, telefone, imagemURI) => {
 
@@ -37,7 +37,6 @@ const NovoContatoTela = (props) => {
       data: data
   })
 
-    //dispatch(contatosActions.addContato(contato, telefone, imagemURI, latitude, longitude))
     props.navigation.goBack();
   }
 

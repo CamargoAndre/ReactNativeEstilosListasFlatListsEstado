@@ -7,8 +7,6 @@ import reduxThunk from 'redux-thunk';
 import contatosReducer from './store/contatos-reducer';
 
 
-import  { init } from './helpers/db';
-
 
 /*init()
   .then(()=> {
